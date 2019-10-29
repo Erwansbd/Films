@@ -33,6 +33,7 @@ public class Acteur {
 	private LocalDate naissance;
 	@Column(name = "date_deces")
 	private LocalDate deces;
+	
 	@Transient
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="film_acteur",
