@@ -40,6 +40,15 @@ public class Acteur {
 			inverseJoinColumns = @JoinColumn(name="fk_film"))
 	private List<Film> films = new ArrayList<Film>();
 	
+	public Acteur() {
+		
+	}
+	public Acteur(String civilite, String nom, String prenom) {
+		super();
+		this.civilite = civilite;
+		this.nom = nom;
+		this.prenom = prenom;
+	}
 	public long getId() {
 		return id;
 	}
@@ -81,6 +90,26 @@ public class Acteur {
 	}
 	public void setFilms(List<Film> films) {
 		this.films = films;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Acteur other = (Acteur) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
 	
 	

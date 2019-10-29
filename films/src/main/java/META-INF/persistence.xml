@@ -4,7 +4,7 @@
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url"	value="jdbc:mysql://localhost:3306/cinema?serverTimezone=Europe/Paris" />
+			<property name="javax.persistence.jdbc.url"	value="jdbc:mysql://localhost:3306/cinema?serverTimezone=CET" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="P@ssw0rd" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />

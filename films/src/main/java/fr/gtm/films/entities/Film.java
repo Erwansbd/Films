@@ -18,6 +18,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.MapKey;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -46,7 +48,8 @@ public class Film {
 	@JoinTable(name="film_acteur",
 	joinColumns = @JoinColumn(name="fk_film"),
 	inverseJoinColumns = @JoinColumn(name="fk_acteur"))
-	List<Acteur> acteurs = new ArrayList<Acteur>();
+	@MapKeyColumn(name = "role")
+	Map<String, Acteur> acteurs = new HashMap<String, Acteur>();
 
 	public long getId() {
 		return id;
@@ -88,13 +91,63 @@ public class Film {
 		this.duree = duree;
 	}
 
-	public List<Acteur> getActeurs() {
+	public Map<String, Acteur> getActeurs() {
 		return acteurs;
 	}
 
-	public void setActeurs(List<Acteur> acteurs) {
+	public void setActeurs(Map<String, Acteur> acteurs) {
 		this.acteurs = acteurs;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((acteurs == null) ? 0 : acteurs.hashCode());
+		result = prime * result + ((dateSortie == null) ? 0 : dateSortie.hashCode());
+		result = prime * result + duree;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((realisateur == null) ? 0 : realisateur.hashCode());
+		result = prime * result + ((titre == null) ? 0 : titre.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Film other = (Film) obj;
+		if (acteurs == null) {
+			if (other.acteurs != null)
+				return false;
+		} else if (!acteurs.equals(other.acteurs))
+			return false;
+		if (dateSortie == null) {
+			if (other.dateSortie != null)
+				return false;
+		} else if (!dateSortie.equals(other.dateSortie))
+			return false;
+		if (duree != other.duree)
+			return false;
+		if (id != other.id)
+			return false;
+		if (realisateur == null) {
+			if (other.realisateur != null)
+				return false;
+		} else if (!realisateur.equals(other.realisateur))
+			return false;
+		if (titre == null) {
+			if (other.titre != null)
+				return false;
+		} else if (!titre.equals(other.titre))
+			return false;
+		return true;
+	}
+	
 	
 	
 }
